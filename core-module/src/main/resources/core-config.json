@@ -1,0 +1,24 @@
+[
+  {
+    "tenantName": "common-config",
+    "categoryName": "TestCategory",
+    "accessRole": [
+      "public",
+      "user"
+    ],
+    "configurationItems": [
+      {
+        "configKey": "test",
+        "configValue": "testValue",
+        "accessRole": [
+          "admin"
+        ],
+        "encrypted": true
+      },
+      {
+        "configKey": "test-1",
+        "configValue": "test-value2"
+      }
+    ]
+  }
+]
