@@ -7,7 +7,7 @@ import jakarta.validation.constraints.PastOrPresent;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -21,8 +21,8 @@ public class License {
     private String email;
     @NotBlank(message = "PurchaseDate is mandatory")
     @PastOrPresent(message = "PurchaseDate should be past/present date")
-    private LocalDate purchaseDate;
+    private Date purchaseDate;
     @NotBlank(message = "ExpiryDate is mandatory")
     @Future(message = "ExpiryDate should be future date")
-    private LocalDate expiryDate;
+    private Date expiryDate;
 }

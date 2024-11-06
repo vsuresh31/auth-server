@@ -29,6 +29,7 @@
         <module>rule-engine</module>
         <module>account</module>
         <module>license-server</module>
+        <module>common</module>
     </modules>
     <scm>
         <connection/>
@@ -41,6 +42,7 @@
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <nimbus-jose-jwt.version>9.45</nimbus-jose-jwt.version>
     </properties>
 
     <dependencies>
@@ -56,6 +58,16 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>${nimbus-jose-jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jovora.common</groupId>
+                <artifactId>common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-bootstrap</artifactId>
