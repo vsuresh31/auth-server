@@ -1,0 +1,13 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          client-oidc:
+            client-name: google
+            provider: google
+            client-id: client-id
+            client-secret: client-secret
+            scope: openid, profile, email
+            redirect-uri: "{baseUrl}/login/oauth2/code/client-oidc"
+            authorization-grant-type: authorization_code
