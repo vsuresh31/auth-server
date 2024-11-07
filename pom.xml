@@ -25,11 +25,9 @@
         <module>core-module</module>
         <module>jovora-app</module>
         <module>authentication</module>
-        <module>authorization</module>
         <module>rule-engine</module>
         <module>account</module>
         <module>license-server</module>
-        <module>common</module>
     </modules>
     <scm>
         <connection/>
@@ -63,11 +61,7 @@
                 <artifactId>nimbus-jose-jwt</artifactId>
                 <version>${nimbus-jose-jwt.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.jovora.common</groupId>
-                <artifactId>common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-bootstrap</artifactId>
