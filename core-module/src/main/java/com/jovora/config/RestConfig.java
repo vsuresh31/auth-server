@@ -12,6 +12,8 @@ import java.util.HashMap;
 public class RestConfig implements PropertySourceLocator {
 
 
+
+
     @Override
     public PropertySource<?> locate(Environment environment) {
         return new MapPropertySource("config", new HashMap<>());

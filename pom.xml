@@ -28,6 +28,7 @@
         <module>rule-engine</module>
         <module>account</module>
         <module>license-server</module>
+        <module>authorization-server</module>
     </modules>
     <scm>
         <connection/>
