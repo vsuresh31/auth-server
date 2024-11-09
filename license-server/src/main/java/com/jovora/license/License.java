@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class License {
-    @NotBlank(message = "UserName is mandatory")
+    @NotBlank(message = "Identifier is mandatory")
     private String identifier;
     @NotBlank(message = "UserName is mandatory")
     private String userName;

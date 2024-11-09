@@ -1,0 +1,18 @@
+### GET request to example server
+GET {{baseUrl}}/config/get-by-tenant/local
+
+###
+
+GET {{baseUrl}}/auth
+
+###
+
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "username": "sv_test1",
+  "password": "asdfred"
+}
+
+###
