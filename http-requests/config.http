@@ -5,14 +5,21 @@ GET {{baseUrl}}/config/get-by-tenant/local
 
 GET {{baseUrl}}/auth
 
-###
+### Signup
 
 POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "username": "sv_test2",
+  "password": "asdfred"
+}
+
+### SignIn
+POST {{baseUrl}}/auth/signin
 Content-Type: application/json
 
 {
   "username": "sv_test1",
   "password": "asdfred"
 }
-
-###

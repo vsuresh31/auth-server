@@ -1,17 +1,11 @@
 package com.jovora.auth.model;
 
+import com.jovora.validator.GroupValidationNotBlank;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-public class SignUpRequest {
-    private String username;
-    @NotBlank(message = "password is mandatory")
-    private String password;
-    @Email
-    private String email;
 
+@GroupValidationNotBlank(fields = {"username", "email"}, message = "Please provide valid user")
+public record SignUpRequest(String username, @Email String email,
+                            @NotBlank(message = "Password is mandatory") String password) {
 }
