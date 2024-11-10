@@ -16,14 +16,14 @@ public class SignInService {
 
     private final UserRepository userRepository;
 
-    private final PasswordEncoder passwordEncoder;
-
     private final AuthenticationManager authenticationManager;
 
-    public SignInService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
+    private final JWTProvider jwtProvider;
+
+    public SignInService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JWTProvider jwtProvider) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
+        this.jwtProvider = jwtProvider;
     }
 
     public UserDto signIn(SignInRequest signInRequest) {
@@ -37,6 +37,7 @@ public class SignInService {
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.username(), signInRequest.password()));
 
-        return UserDto.builder().identifier(user.getUserId()).username(user.getUsername()).build();
+        String token = jwtProvider.generateJWT(user);
+        return UserDto.builder().token(token).build();
     }
 }

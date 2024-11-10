@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "jwt.expiry.inSec",
+      "type": "java.lang.String",
+      "description": "Time in seconds to expiry JWT token."
+    }
+  ]
+}
