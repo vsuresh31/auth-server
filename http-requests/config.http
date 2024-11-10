@@ -1,5 +1,6 @@
-### GET request to example server
+### Config
 GET {{baseUrl}}/config/get-by-tenant/local
+Authorization: Bearer {{token}}
 
 ###
 
@@ -23,3 +24,7 @@ Content-Type: application/json
   "username": "sv_test1",
   "password": "asdfred"
 }
+
+> {% client.global.set("token", response.body.token) %}
+
+### Config

@@ -1,4 +1,4 @@
-package com.jovora.auth;
+package com.jovora.auth.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;

@@ -1,6 +1,6 @@
 package com.jovora.auth;
 
-import org.springframework.context.annotation.Bean;
+import com.jovora.auth.config.CustomAuthenticationEntryPoint;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;

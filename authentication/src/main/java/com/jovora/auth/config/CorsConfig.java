@@ -1,4 +1,4 @@
-package com.jovora.auth;
+package com.jovora.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

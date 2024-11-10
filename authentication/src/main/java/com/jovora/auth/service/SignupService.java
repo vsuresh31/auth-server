@@ -1,6 +1,6 @@
 package com.jovora.auth.service;
 
-import com.jovora.auth.UserDto;
+import com.jovora.auth.dto.UserDto;
 import com.jovora.auth.entity.User;
 import com.jovora.auth.exception.InvalidUserException;
 import com.jovora.auth.model.SignUpRequest;

@@ -16,7 +16,7 @@ public class DataSourceConfig {
         this.env = env;
     }
 
-    @Bean
+//    @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));

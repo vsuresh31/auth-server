@@ -1,12 +1,10 @@
-package com.jovora.auth;
+package com.jovora.auth.config;
 
+import com.jovora.auth.service.JWTProvider;
 import com.jovora.auth.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,14 +14,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.context.NullSecurityContextRepository;
 import org.springframework.security.web.savedrequest.NullRequestCache;
 
 @Configuration
 public class SecurityConfig {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
+
+    private final JWTProvider jwtProvider;
+
+    public SecurityConfig(UserDetailsService userDetailsService, JWTProvider jwtProvider) {
+        this.userDetailsService = userDetailsService;
+        this.jwtProvider = jwtProvider;
+    }
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, UserService userService) throws Exception {
@@ -35,19 +40,20 @@ public class SecurityConfig {
                 .securityContext(f -> f.securityContextRepository(new NullSecurityContextRepository()))
                 .requestCache(f -> f.requestCache(new NullRequestCache()))
                 .passwordManagement(Customizer.withDefaults())
-                .authorizeHttpRequests(f -> f.anyRequest().permitAll())
-                .userDetailsService(userService);
-//        http.authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated()).formLogin(Customizer.withDefaults());
+                .authorizeHttpRequests(f -> f.requestMatchers("/api/auth/**").permitAll()
+                        .anyRequest().authenticated())
+                .exceptionHandling(f -> f.authenticationEntryPoint(new CustomAuthenticationEntryPoint()))
+                .addFilterBefore(new AuthTokenFilter(jwtProvider, userDetailsService), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
-    }
+//    @Bean
+//    public AuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+//        provider.setUserDetailsService(userDetailsService);
+//        provider.setPasswordEncoder(passwordEncoder());
+//        return provider;
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

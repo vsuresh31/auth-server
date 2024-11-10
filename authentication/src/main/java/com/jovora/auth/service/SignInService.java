@@ -1,6 +1,6 @@
 package com.jovora.auth.service;
 
-import com.jovora.auth.UserDto;
+import com.jovora.auth.dto.UserDto;
 import com.jovora.auth.entity.User;
 import com.jovora.auth.exception.InvalidUserException;
 import com.jovora.auth.model.SignInRequest;
@@ -8,6 +8,7 @@ import com.jovora.auth.repository.UserRepository;
 import com.jovora.utils.TextUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,8 @@ public class SignInService {
             user = userRepository.findUserByUsername(signInRequest.username()).orElseThrow(() -> new InvalidUserException("User not found"));
         }
 
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.username(), signInRequest.password()));
+        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.username(), signInRequest.password()));
+        Object details = authenticate.getDetails();
 
         String token = jwtProvider.generateJWT(user);
         return UserDto.builder().token(token).build();
