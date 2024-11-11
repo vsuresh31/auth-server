@@ -8,7 +8,7 @@ import org.springframework.core.env.PropertySource;
 
 import java.util.HashMap;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class RestConfig implements PropertySourceLocator {
 
 

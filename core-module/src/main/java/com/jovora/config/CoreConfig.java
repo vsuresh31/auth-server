@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class CoreConfig implements ApplicationRunner {
     private static List<TenantDetail> tenantProperties = new ArrayList<>();
 

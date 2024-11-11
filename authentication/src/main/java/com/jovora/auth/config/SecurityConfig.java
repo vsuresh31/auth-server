@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.context.NullSecurityContextRepository;
 import org.springframework.security.web.savedrequest.NullRequestCache;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .securityContext(f -> f.securityContextRepository(new NullSecurityContextRepository()))
                 .requestCache(f -> f.requestCache(new NullRequestCache()))
                 .passwordManagement(Customizer.withDefaults())
-                .authorizeHttpRequests(f -> f.requestMatchers("/api/auth/**").permitAll()
+                .authorizeHttpRequests(f -> f.requestMatchers("/api/auth/**", "/actuator/**").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(f -> f.authenticationEntryPoint(new CustomAuthenticationEntryPoint()))
                 .addFilterBefore(new AuthTokenFilter(jwtProvider, userDetailsService), UsernamePasswordAuthenticationFilter.class);
@@ -61,9 +61,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+    public AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.eraseCredentials(true).userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.eraseCredentials(true).userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
         return authenticationManagerBuilder.build();
     }
 

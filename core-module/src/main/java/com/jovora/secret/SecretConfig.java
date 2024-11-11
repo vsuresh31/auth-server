@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @PropertySource("classpath:secret.properties")
 @ConfigurationProperties(prefix = "ap1001")
 @Getter

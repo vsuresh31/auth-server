@@ -1,31 +1,20 @@
 package com.jovora;
 
-import com.jovora.config.CoreConfig;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.bootstrap.config.PropertySourceLocator;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
+import org.springframework.boot.context.metrics.buffering.BufferingApplicationStartup;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.core.metrics.StartupStep;
+
+import java.util.Arrays;
 
 @SpringBootApplication
-public class JovoraApplication implements ApplicationRunner {
-
-
-    @Autowired
-    private Environment env;
+@Lazy
+public class JovoraApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JovoraApplication.class, args);
+        SpringApplication application = new SpringApplication(JovoraApplication.class);
+//        application.setApplicationStartup(new BufferingApplicationStartup(2048));
+        application.run(args);
     }
-
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-        env.getActiveProfiles();
-
-    }
-
-
 }

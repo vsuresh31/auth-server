@@ -7,7 +7,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
-@Configuration
+//@Configuration(proxyBeanMethods = false)
 public class DataSourceConfig {
 
     private final Environment env;
